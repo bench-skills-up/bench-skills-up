@@ -1,0 +1,78 @@
+name: CI
+
+on:
+  push:
+    branches: ["main", "develop"]
+  pull_request:
+    branches: ["main"]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-lint:
+    name: Build and Lint (${{ matrix.os }} / Node.js ${{ matrix.node }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        node: [20]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{
+            matrix.node
+          }}
+          cache: 'pnpm'
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build packages
+        run: pnpm turbo run build --filter=./packages/*
+
+      - name: Lint
+        run: pnpm turbo run lint
+
+      - name: Test
+        run: pnpm turbo run test
+
+  storybook-build:
+    name: storybook Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build packages first
+        run: pnpm turbo run build --filter=./packages/*
+
+      - name: Build Storybook
+        run: pnpm --filter @bench-skills-up/storybook-app run build-storybook

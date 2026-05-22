@@ -1,0 +1,18 @@
+# Code owners for the repository
+# Replace the placeholder GitHub teams/users with your actual owners
+
+# Frontend app
+/apps/bench-skills-up/ @your-org/frontend-team
+
+# UI packages and design tokens
+/packages/ui-components/ @your-org/frontend-team
+/packages/theme-tokens/ @your-org/design-team
+
+# Storybook app
+/apps/storybook/ @your-org/frontend-team
+
+# CI/config ownership
+/.github/ @your-org/devops-team
+
+# Fallback owners
+* @your-org/repo-admins

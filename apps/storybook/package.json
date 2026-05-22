@@ -1,5 +1,5 @@
 {
-  "name": "storybook",
+  "name": "@bench-skills-up/storybook-app",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -17,6 +17,7 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "@bench-skills-up/ui-components": "workspace:*"
+    "@bench-skills-up/ui-components": "workspace:*",
+    "@bench-skills-up/theme-tokens": "workspace:*"
   }
 }

@@ -4,20 +4,41 @@
   "version": "0.0.0",
   "description": "Monorepo scaffold for pnpm + Turborepo + changesets",
   "scripts": {
-    "build": "turbo run build",
     "dev": "turbo run dev --parallel",
-    "lint": "turbo run lint",
+    "build": "turbo run build",
+    "preview": "turbo run preview",
+    "storybook": "pnpm --filter @bench-skills-up/storybook-app run dev",
+    "build-storybook": "pnpm --filter @bench-skills-up/storybook-app build",
+    "serve-storybook": "pnpm --filter @bench-skills-up/storybook-app serve",
+    "test-storybook": "pnpm --filter @bench-skills-up/storybook-app test",
+    "link": "pnpm -w -r link",
     "test": "turbo run test",
+    "lint": "turbo run lint",
+    "lint:fix": "turbo run lint -- --fix 'packages/**/*.{js,jsx,ts,tsx,json}'",
+    "format": "prettier --write 'packages/**/*.{js,jsx,ts,tsx,css,md,mdx,json}' --config ./.prettierrc",
+    "prepublishOnly": "pnpm -w -r build",
+    "generate-component": "node ./scripts/generate-component.js",
+    "prepare": "husky install",
     "changeset": "changeset",
-    "preinstall": "npx only-allow pnpm",
-    "storybook": "pnpm --filter storybook --parallel run storybook"
+    "preinstall": "npx only-allow pnpm"
   },
   "devDependencies": {
-    "turbo": "^2.9.14",
-    "typescript": "^6.0.3",
     "@changesets/cli": "^2.0.0",
     "@storybook/react-vite": "^10.4.0",
-    "storybook": "^10.4.0"
+    "@vitejs/plugin-react": "^5.2.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.2.0",
+    "storybook": "^10.4.0",
+    "turbo": "^2.9.14",
+    "typescript": "^6.0.3"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx,css,md,json}": [
+      "pnpm -w -r lint",
+      "pnpm -w -r test",
+      "pnpm -w -r build",
+      "git add"
+    ]
   },
   "packageManager": "pnpm@10.33.2"
 }

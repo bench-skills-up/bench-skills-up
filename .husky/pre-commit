@@ -1,0 +1,5 @@
+#!/bin/sh
+pnpm turbo lint || exit 1
+pnpm turbo test || exit 1
+pnpm turbo build || exit 1
+pnpm -w exec lint-staged || exit 1

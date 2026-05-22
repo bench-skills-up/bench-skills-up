@@ -1,7 +1,7 @@
 {
-  "changelog": ["@changesets/changelog-github", {"repo": "bench-skills-up/rishi-kumar-verma"}],
+  "changelog": ["@changesets/changelog-github", {"repo": "bench-skills-up/bench-skills-up"}],
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": []
+  "ignore": ["@bench-skills-up/storybook-app"]
 }
