@@ -1,0 +1,23 @@
+{
+  "name": "bench-skills-up",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Monorepo scaffold for pnpm + Turborepo + changesets",
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "changeset": "changeset",
+    "preinstall": "npx only-allow pnpm",
+    "storybook": "pnpm --filter storybook --parallel run storybook"
+  },
+  "devDependencies": {
+    "turbo": "^2.9.14",
+    "typescript": "^6.0.3",
+    "@changesets/cli": "^2.0.0",
+    "@storybook/react-vite": "^10.4.0",
+    "storybook": "^10.4.0"
+  },
+  "packageManager": "pnpm@10.33.2"
+}

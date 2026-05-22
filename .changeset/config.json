@@ -1,0 +1,7 @@
+{
+  "changelog": ["@changesets/changelog-github", {"repo": "bench-skills-up/rishi-kumar-verma"}],
+  "access": "public",
+  "baseBranch": "main",
+  "updateInternalDependencies": "patch",
+  "ignore": []
+}
