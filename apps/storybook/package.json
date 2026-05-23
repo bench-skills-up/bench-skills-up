@@ -4,8 +4,11 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "dev": "storybook dev -p 6006",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build": "storybook build",
+    "serve": "storybook serve",
+    "test": "storybook test --ci --coverage"
   },
   "devDependencies": {
     "storybook": "^10.4.0",
