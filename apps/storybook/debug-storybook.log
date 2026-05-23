@@ -1,0 +1,21 @@
+[19:40:42.199] [INFO] storybook v10.4.0
+[19:40:44.415] [DEBUG] Getting package.json info for C:/projects/bench-skills-up/apps/storybook/package.json...
+[19:40:44.451] [WARN] Could not resolve addon "@storybook/addon-theme", skipping. Is it installed?
+[19:40:44.464] [WARN] Could not resolve addon "@storybook/addon-viewport", skipping. Is it installed?
+[19:40:47.086] [INFO] Storybook collects completely anonymous usage telemetry. We use it to shape Storybook's roadmap and prioritize features. You can learn more, including how to opt out, at https://storybook.js.org/telemetry
+[19:40:47.114] [ERROR] Error [ERR_PACKAGE_PATH_NOT_EXPORTED]: Package subpath './internal/mocking-utils' is not defined by "exports" in C:\projects\bench-skills-up\node_modules\.pnpm\@storybook+builder-vite@10._6817020373ec87d7e280563fabddc535\node_modules\storybook\package.json imported from C:\projects\bench-skills-up\node_modules\.pnpm\@storybook+builder-vite@10._6817020373ec87d7e280563fabddc535\node_modules\@storybook\builder-vite\dist\_node-chunks\chunk-RPKZLEOZ.js
+    at exportsNotFound (node:internal/modules/esm/resolve:313:10)
+    at packageExportsResolve (node:internal/modules/esm/resolve:660:9)
+    at packageResolve (node:internal/modules/esm/resolve:773:12)
+    at moduleResolve (node:internal/modules/esm/resolve:853:18)
+    at defaultResolve (node:internal/modules/esm/resolve:983:11)
+    at nextResolve (node:internal/modules/esm/hooks:748:28)
+    at Hooks.resolve (node:internal/modules/esm/hooks:240:30)
+    at handleMessage (node:internal/modules/esm/worker:199:24)
+    at checkForMessages (node:internal/modules/esm/worker:141:28)
+    at process.<anonymous> (node:internal/modules/esm/worker:160:5)
+[19:40:47.120] [WARN] Broken build, fix the error above.
+You may need to refresh the browser.
+[19:40:47.133] [WARN] Could not resolve addon "@storybook/addon-theme", skipping. Is it installed?
+[19:40:47.134] [WARN] Could not resolve addon "@storybook/addon-viewport", skipping. Is it installed?
+[19:40:49.201] [PROMPT] Would you like to send anonymous crash reports to improve Storybook and fix bugs faster? {"choice":true}

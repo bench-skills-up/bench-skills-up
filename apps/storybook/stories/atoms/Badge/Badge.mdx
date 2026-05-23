@@ -1,0 +1,47 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks'
+import * as BadgeStories from './Badge.stories';
+
+<Meta of={BadgeStories} />
+
+# Badge Atom
+
+The Badge atom displays small labels with important information.
+
+## Overview
+
+<Canvas of={BadgeStories.Default} />
+
+## Controls
+
+<Controls of={BadgeStories.Default} />
+
+## Variants
+
+All available badge variants:
+
+<Canvas of={BadgeStories.Variants} />
+
+## Usage
+
+```tsx
+import { Badge } from '@bench-skills-up/ui-components'
+
+export function MyComponent() {
+  return <Badge>New</Badge>
+}
+```
+
+## Props
+
+- `children`: React.ReactNode - Content inside the badge
+- `variant`: "default" | "success" | "error" | "warning" | "info" - Visual style
+- `color`: string - Custom background color
+- `showZero`: boolean - Show badge when content is zero
+
+## Features
+
+- Inline-block display for flexible positioning
+- Multiple variant options
+- Custom color support
+- Pill-shaped border radius
+- Perfect for labels and tags

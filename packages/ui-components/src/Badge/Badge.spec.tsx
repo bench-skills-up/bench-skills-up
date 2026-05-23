@@ -13,7 +13,18 @@ describe('Badge Component', () => {
     expect(screen.getByText('New')).toBeInTheDocument()
   })
 
-  it('applies correct badge styles', () => {
+  it('renders with badgeContent prop', () => {
+    render(<Badge badgeContent="Active" />)
+    expect(screen.getByText('Active')).toBeInTheDocument()
+  })
+
+  it('prefers badgeContent over children', () => {
+    render(<Badge badgeContent="Badge Content">Children</Badge>)
+    expect(screen.getByText('Badge Content')).toBeInTheDocument()
+    expect(screen.queryByText('Children')).not.toBeInTheDocument()
+  })
+
+  it('applies correct default styles', () => {
     const { container } = render(<Badge>Label</Badge>)
     const span = container.querySelector('span')
     expect(span).toHaveStyle({
@@ -24,12 +35,41 @@ describe('Badge Component', () => {
     })
   })
 
-  it('has primary background color from theme tokens', () => {
-    const { container } = render(<Badge>Active</Badge>)
+  it('applies variant styles', () => {
+    const { container } = render(<Badge variant="success">Success</Badge>)
     const span = container.querySelector('span')
     const styles = window.getComputedStyle(span!)
-    // Check that background is set (color value will vary based on tokens)
-    expect(styles.backgroundColor).toBeTruthy()
+    expect(styles.backgroundColor).toBe('rgb(76, 175, 80)')
+  })
+
+  it('applies custom color', () => {
+    const { container } = render(<Badge color="#ff0000">Custom</Badge>)
+    const span = container.querySelector('span')
+    const styles = window.getComputedStyle(span!)
+    expect(styles.backgroundColor).toBe('rgb(255, 0, 0)')
+  })
+
+  it('hides zero value when showZero is false', () => {
+    const { container } = render(<Badge badgeContent={0} showZero={false} />)
+    expect(container.querySelector('span')).not.toBeInTheDocument()
+  })
+
+  it('shows zero value when showZero is true', () => {
+    render(<Badge badgeContent={0} showZero={true} />)
+    expect(screen.getByText('0')).toBeInTheDocument()
+  })
+
+  it('renders multiple badge variants', () => {
+    const { container } = render(
+      <>
+        <Badge variant="default">Default</Badge>
+        <Badge variant="success">Success</Badge>
+        <Badge variant="error">Error</Badge>
+        <Badge variant="warning">Warning</Badge>
+        <Badge variant="info">Info</Badge>
+      </>
+    )
+    expect(container.querySelectorAll('span')).toHaveLength(5)
   })
 
   it('renders without children', () => {
@@ -37,34 +77,5 @@ describe('Badge Component', () => {
     const span = container.querySelector('span')
     expect(span).toBeInTheDocument()
     expect(span?.textContent).toBe('')
-  })
-
-  it('renders React node children', () => {
-    render(
-      <Badge>
-        <strong data-testid="badge-content">Premium</strong>
-      </Badge>
-    )
-    expect(screen.getByTestId('badge-content')).toBeInTheDocument()
-    expect(screen.getByText('Premium')).toBeInTheDocument()
-  })
-
-  it('renders multiple badges', () => {
-    render(
-      <>
-        <Badge>Badge 1</Badge>
-        <Badge>Badge 2</Badge>
-        <Badge>Badge 3</Badge>
-      </>
-    )
-    expect(screen.getByText('Badge 1')).toBeInTheDocument()
-    expect(screen.getByText('Badge 2')).toBeInTheDocument()
-    expect(screen.getByText('Badge 3')).toBeInTheDocument()
-  })
-
-  it('renders as inline-block element', () => {
-    const { container } = render(<Badge>Inline</Badge>)
-    const span = container.querySelector('span')
-    expect(span).toHaveStyle('display: inline-block')
   })
 })
