@@ -49,7 +49,7 @@ jobs:
       - name: create release PR or publish packages
         uses: changesets/action@v1
         with:
-          publish: pnpm exec changeset publish --access public
+          publish: pnpm exec changeset publish
           version: pnpm exec changeset version
           commit: "chore: release packages"
           title: "chore: release packages"
