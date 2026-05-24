@@ -1,14 +1,8 @@
-
-import type { StorybookConfig } from '@storybook/react-vite'
-import svgr from 'vite-plugin-svgr'
-import path from 'path'
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const svgr = require('vite-plugin-svgr')
+const path = require('path')
 
 
-const config: StorybookConfig = {
+const config = {
   stories: [
     '../stories/**/*.mdx',
     '../stories/**/*.stories.@(js|jsx|ts|tsx)'
@@ -17,18 +11,21 @@ const config: StorybookConfig = {
     '@storybook/addon-docs',
     '@chromatic-com/storybook',
     '@storybook/addon-a11y',
-    '@storybook/addon-theme',
-    '@storybook/addon-coverage',
+    '@storybook/addon-onboarding',
     '@storybook/addon-viewport'
   ],
   framework: '@storybook/react-vite',
   staticDirs: ['../../../public'],
   viteFinal: async (config) => {
     config.plugins = config.plugins ?? [];
-    config.plugins.push(svgr());
+    if (typeof svgr === 'function') {
+      config.plugins.push(svgr());
+    } else if (svgr.default && typeof svgr.default === 'function') {
+      config.plugins.push(svgr.default());
+    }
     config.resolve = config.resolve ?? {};
     config.resolve.alias = {
-      ...(config.resolve.alias as Record<string, string> ?? {}),
+      ...(config.resolve.alias ?? {}),
       '@bench-skills-up/ui-components': path.resolve(__dirname, '../../../packages/ui-components/src'),
       '@bench-skills-up/theme-tokens': path.resolve(__dirname, '../../../packages/theme-tokens/src'),
     };
@@ -41,4 +38,4 @@ const config: StorybookConfig = {
   }
 }
 
-export default config;
+module.exports = config;

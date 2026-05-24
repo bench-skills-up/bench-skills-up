@@ -49,7 +49,5 @@ export const Default: Story = {
       },
     },
   },
-  render: (args: BadgeProps) => (
-    <BadgeDemo {...args} variant="default" badgeContent="New" />
-  ),
+  render: (args: BadgeProps) => <BadgeDemo {...args} />,
 };
