@@ -15,7 +15,7 @@ const config = {
     '@storybook/addon-viewport'
   ],
   framework: '@storybook/react-vite',
-  staticDirs: ['../../../public'],
+  staticDirs: ['../public', '../../../public'],
   viteFinal: async (config) => {
     config.plugins = config.plugins ?? [];
     if (typeof svgr === 'function') {
