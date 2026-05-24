@@ -75,4 +75,4 @@ jobs:
         run: pnpm turbo run build --filter=./packages/*
 
       - name: Build Storybook
-        run: pnpm --filter @bench-skills-up/storybook-app run build-storybook
+        run: pnpm --filter @bench-skills-up/storybook-app run build

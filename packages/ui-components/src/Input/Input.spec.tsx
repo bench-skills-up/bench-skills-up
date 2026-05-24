@@ -25,7 +25,7 @@ describe('Input Component', () => {
   })
 
   it('accepts value prop', () => {
-    const { rerender } = render(<Input value="test" readOnly />)
+    render(<Input value="test" readOnly />)
     expect(screen.getByRole('textbox')).toHaveValue('test')
   })
 

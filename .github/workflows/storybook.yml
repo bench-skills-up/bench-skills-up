@@ -12,6 +12,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      
+      - name: Enable Corepack
+        run: corepack enable
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -19,14 +22,11 @@ jobs:
           node-version: '20'
           cache: 'pnpm'
 
-      - name: Enable Corepack
-        run: corepack enable
-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Build Storybook
-        run: pnpm --filter @bench-skills-up/storybook-app run build-storybook
+        run: pnpm --filter @bench-skills-up/storybook-app run build
 
       - name: Upload Storybook artifact
         uses: actions/upload-artifact@v4
