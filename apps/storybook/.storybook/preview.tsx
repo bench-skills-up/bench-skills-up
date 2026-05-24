@@ -40,7 +40,7 @@ export const globalTypes = {
 
 const preview: Preview = {
   decorators: [(Story, context) => {
-    const { mode, brand } = context.globals;
+    const { mode } = context.globals;
     const backgroundColor = mode === 'dark' ? tokens.colors.darkBackground : tokens.colors.lightBackground;
     // const brandColor = tokens.colors[brand] || tokens.colors.primary;
     return (
@@ -50,6 +50,8 @@ const preview: Preview = {
     );
   }],
 }
+
+export default preview
 
 
 
