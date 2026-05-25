@@ -21,14 +21,14 @@
   },
   "dependencies": {
     "@bench-skills-up/theme-tokens": "workspace:*",
-    "react": "^18.2.0"
+    "react": "^19.2.6"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.0.0",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.0.0",
     "@types/jest": "^29.0.0",
-    "@types/react": "^18.0.0",
+    "@types/react": "^19.2.15",
     "jest": "^29.0.0",
     "jest-environment-jsdom": "^30.4.1",
     "ts-jest": "^29.0.0",
