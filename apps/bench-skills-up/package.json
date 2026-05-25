@@ -7,6 +7,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint . --ignore-pattern=dist",
+    "type-check": "tsc --noEmit",
     "test": "jest"
   },
   "dependencies": {

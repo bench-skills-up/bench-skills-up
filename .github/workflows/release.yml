@@ -6,10 +6,10 @@ on:
 
 concurrency:
   group: release-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 permissions:
-  contents: read
+  contents: write
   pull-requests: write
   packages: write
   id-token: write
@@ -43,11 +43,35 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: build publishable packages
+      - name: Build publishable packages
         run: pnpm turbo run build --filter=./packages/*
 
-      - name: create release PR or publish packages
+      - name: Run tests before release
+        run: pnpm turbo run test
+
+      - name: Create Release PR or Publish packages
         uses: changesets/action@v1
+        with:
+          publish: pnpm changeset:publish
+          version: pnpm changeset:version
+          commit: "chore(release): version packages"
+          title: "chore(release): version packages"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create GitHub Release
+        if: steps.changesets.outputs.published == 'true'
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ steps.changesets.outputs.publishedPackages[0].version }}
+          release_name: Release ${{ steps.changesets.outputs.publishedPackages[0].version }}
+          body: ${{ steps.changesets.outputs.publishedPackages[0].changelog }}
+          draft: false
+          prerelease: false
+
         with:
           publish: pnpm exec changeset publish
           version: pnpm exec changeset version

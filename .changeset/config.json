@@ -3,5 +3,10 @@
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["@bench-skills-up/storybook-app"]
+  "ignore": ["@bench-skills-up/storybook-app"],
+  "commit": false,
+  "linked": [],
+  "privatePackages": {
+    "skipChangesets": false
+  }
 }

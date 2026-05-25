@@ -1,0 +1,76 @@
+name: Deploy to npm Registry
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+  packages: write
+  id-token: write
+
+jobs:
+  deploy:
+    name: Deploy to npm Registry
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.tag_name }}
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://npm.pkg.github.com
+          scope: "@bench-skills-up"
+          cache: 'pnpm'
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build packages
+        run: pnpm turbo run build --filter=./packages/*
+
+      - name: Run quality checks
+        run: |
+          pnpm lint
+          pnpm type-check
+          pnpm test
+
+      - name: Publish to npm registry
+        run: pnpm -r publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create deployment status
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.repos.createDeployment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: '${{ github.event.release.tag_name }}',
+              environment: 'npm-registry',
+              description: 'Deployed to npm registry',
+              auto_merge: false,
+              required_contexts: []
+            });
+
+      - name: Comment on Release
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: ${{ github.event.release.id }},
+              body: '✅ Packages successfully published to npm registry!\n\nView them at: https://github.com/orgs/bench-skills-up/packages'
+            })
