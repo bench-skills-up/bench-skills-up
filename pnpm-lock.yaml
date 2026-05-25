@@ -282,8 +282,8 @@ importers:
         specifier: ^8.0.0
         version: 8.6.18(@types/react@18.3.29)(storybook@8.6.18(prettier@3.8.3))
       '@storybook/addon-links':
-        specifier: ^8.0.0
-        version: 8.6.18(react@18.3.1)(storybook@8.6.18(prettier@3.8.3))
+        specifier: ^10.4.1
+        version: 10.4.1(@types/react@18.3.29)(react@18.3.1)(storybook@8.6.18(prettier@3.8.3))
       '@storybook/addon-onboarding':
         specifier: ^8.0.0
         version: 8.6.18(storybook@8.6.18(prettier@3.8.3))
@@ -1733,12 +1733,15 @@ packages:
     peerDependencies:
       storybook: ^8.6.18
 
-  '@storybook/addon-links@8.6.18':
-    resolution: {integrity: sha512-FFlQcPRTgXoFZr2uawtf7lNc/ceIVRhU13BkJbJZKlil3+C8ORFDO1vnREzHje9JzeOWm/rzI0ay0RVetCcXzg==}
+  '@storybook/addon-links@10.4.1':
+    resolution: {integrity: sha512-h/5D23GwMuHA55sB7XDyhByF9psF7UFmaQOn72pjNAarew5eOpue5A+jXk3AKEYokHbvgQaoz+FrvWo9GEfSKQ==}
     peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
-      storybook: ^8.6.18
+      '@types/react': ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+      storybook: ^10.4.1
     peerDependenciesMeta:
+      '@types/react':
+        optional: true
       react:
         optional: true
 
@@ -7537,12 +7540,12 @@ snapshots:
       '@storybook/global': 5.0.0
       storybook: 8.6.18(prettier@3.8.3)
 
-  '@storybook/addon-links@8.6.18(react@18.3.1)(storybook@8.6.18(prettier@3.8.3))':
+  '@storybook/addon-links@10.4.1(@types/react@18.3.29)(react@18.3.1)(storybook@8.6.18(prettier@3.8.3))':
     dependencies:
       '@storybook/global': 5.0.0
       storybook: 8.6.18(prettier@3.8.3)
-      ts-dedent: 2.2.0
     optionalDependencies:
+      '@types/react': 18.3.29
       react: 18.3.1
 
   '@storybook/addon-onboarding@8.6.18(storybook@8.6.18(prettier@3.8.3))':
