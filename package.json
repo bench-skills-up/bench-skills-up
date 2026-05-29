@@ -104,7 +104,7 @@
     "react-dom": "^18.3.1",
     "sonarqube-scanner": "^4.3.6",
     "storybook": "^8.0.4",
-    "tailwindcss": "^4.2.2",
+    "tailwindcss": "^4.3.0",
     "ts-jest": "^29.4.9",
     "tsup": "^8.5.1",
     "turbo": "^2.9.14",
